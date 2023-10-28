@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>vue2 rollup</title>
+</head>
+<body>
+    <div id="app">hello</div>
+    <script src="dist/vue.js"></script>
+    <script>
+        console.log(Vue)
+        let vm = new Vue({
+            el: '#app',
+            // data: {
+            //     dateTest: '123'
+            // },
+            data(){
+                console.log(this)
+                return{
+                    msg:'hello',
+                    a:{
+                        b:'b'
+                    }
+                }
+            },
+            watch: {}
+        })
+        console.log(vm._data.msg)
+        vm._data.msg = 'set new value'
+        vm._data.a = {c:1}
+    </script>
+</body>
+</html>
