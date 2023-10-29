@@ -7,26 +7,30 @@
     <div id="app">hello</div>
     <script src="dist/vue.js"></script>
     <script>
-        console.log(Vue)
+        // console.log(Vue)
         let vm = new Vue({
             el: '#app',
             // data: {
             //     dateTest: '123'
             // },
             data(){
-                console.log(this)
+                // console.log(this)
                 return{
                     msg:'hello',
                     a:{
                         b:'b'
-                    }
+                    },
+                    list:[1,2,3,{a:0}]
                 }
             },
             watch: {}
         })
-        console.log(vm._data.msg)
-        vm._data.msg = 'set new value'
+        console.log(vm)
+        console.log(vm._data.list.push({a:1}))
+        // vm._data.msg = 'set new value'
         vm._data.a = {c:1}
+        console.log(vm.msg)
+        console.log(vm.msg = 'new hello')
     </script>
 </body>
 </html>
