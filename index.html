@@ -4,10 +4,10 @@
     <title>vue2 rollup</title>
 </head>
 <body>
-    <div id="app">hello</div>
+    <div id="app">hello {{msg}}</div>
     <script src="dist/vue.js"></script>
     <script>
-        // console.log(Vue)
+        console.log(Vue)
         let vm = new Vue({
             el: '#app',
             // data: {
@@ -25,12 +25,12 @@
             },
             watch: {}
         })
-        console.log(vm)
-        console.log(vm._data.list.push({a:1}))
+        // console.log(vm)
+        // console.log(vm._data.list.push({a:1}))
         // vm._data.msg = 'set new value'
         vm._data.a = {c:1}
-        console.log(vm.msg)
-        console.log(vm.msg = 'new hello')
+        // console.log(vm.msg)
+        // console.log(vm.msg = 'new hello')
     </script>
 </body>
 </html>

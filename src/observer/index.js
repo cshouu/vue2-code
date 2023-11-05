@@ -17,7 +17,7 @@ class Observer {
             enumerable:false,
             value:this
         })
-        console.log(value)
+        // console.log(value)
         if(Array.isArray(value)){
             //劫持数组
             value.__proto__=ArrayMethods
@@ -49,11 +49,11 @@ function defineReactive(data, key, value) {
     observer(value)
     Object.defineProperty(data,key,{
         get(){
-            console.log('object get')
+            // console.log('object get')
             return value
         },
         set(newValve){
-            console.log('object set')
+            // console.log('object set')
             if(newValve == value){
                 return
             }
