@@ -11,7 +11,7 @@ function gen(node) {
         let lastindex=defaultTagRE.lastIndex=0
         let match
         while (match=defaultTagRE.exec(text)){
-            console.log('match',match)
+            // console.log('match',match)
             let index=match.index
             if(index>lastindex){
                 tokens.push(JSON.stringify(text.slice(lastindex,index)))
@@ -56,10 +56,10 @@ function genProps(attrs){
 }
 
 export function generate(el){
-    console.log(el)
+    // console.log(el)
     let children=genChildren(el)
     let code=`_c('${el.tag}',${el.attrs.length ? genProps(el.attrs):JSON.stringify({})},${children?children:null})`
-    console.log(code)
+    // console.log(code)
     return code
 }
 

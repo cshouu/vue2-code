@@ -13,6 +13,16 @@
 </div>
     <script src="dist/vue.js"></script>
     <script>
+        Vue.Mixin({
+            created:function a(){
+                console.log('a')
+            }
+        })
+        Vue.Mixin({
+            created:function b(){
+                console.log('b')
+            }
+        })
         console.log(Vue)
         let vm = new Vue({
             el: '#app',
@@ -29,14 +39,17 @@
                     list:[1,2,3,{a:0}]
                 }
             },
-            watch: {}
+            watch: {},
+            created(){
+                console.log('c')
+            }
         })
-        // console.log(vm)
         // console.log(vm._data.list.push({a:1}))
         // vm._data.msg = 'set new value'
         vm._data.a = {c:1}
         // console.log(vm.msg)
         // console.log(vm.msg = 'new hello')
+        console.log(vm)
     </script>
 </body>
 </html>

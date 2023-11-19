@@ -5,7 +5,7 @@ export function compilerToFunction(el){
     // console.log(el)
     //html翻译成ast数据结构
     let ast = parseHTML(el)
-    console.log(ast)
+    // console.log(ast)
     //ast变成render函数字符串
     let code=generate(ast)
     //render字符串变成函数
