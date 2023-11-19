@@ -5,7 +5,7 @@ function gen(node) {
     }else{ //文本
         let text=node.text
         if(!defaultTagRE.test(text)){
-            return `_v(${text})`
+            return `_v('${text}')`
         }
         let tokens=[]
         let lastindex=defaultTagRE.lastIndex=0
@@ -58,7 +58,7 @@ function genProps(attrs){
 export function generate(el){
     console.log(el)
     let children=genChildren(el)
-    let code=`_c(${el.tag},${el.attrs.length ? genProps(el.attrs): null},${children?children:null})`
+    let code=`_c('${el.tag}',${el.attrs.length ? genProps(el.attrs):JSON.stringify({})},${children?children:null})`
     console.log(code)
     return code
 }
