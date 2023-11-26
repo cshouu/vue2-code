@@ -6,47 +6,48 @@ const attribute = /^\s*([^\s"'<>\/=]+)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s
 const startTagClose = /^\s*(\/?)>/ //开始标签结尾
 const defaultTagRE = /\{\{((?:.|\r?\n)+?)\}\}/g //{{}}
 
-function createASTElement(tag,attrs){
-    return {
-        tag,
-        attrs,
-        children:[],
-        type:1,
-        parent:null
-    }
-}
-let root //根元素
-let createParent //当前元素的父元素
-let stack = [] //栈
-function start(tag, atts){
-    // console.log('start()',tag,atts)
-    let element = createASTElement(tag,atts)
-    if(!root){
-        root =element
-    }
-    createParent=element
-    stack.push(element)
-}
-function charts(text){
-    // console.log('charts(text)',text)
-    text = text.replace(/\s/g,'')
-    if(text){
-        createParent.children.push({
-            type:3,
-            text:text
-        })
-    }
-}
-function end(tag){
-    // console.log('end(tag)',tag)
-    let element=stack.pop()
-    createParent=stack[stack.length-1]
-    if(createParent){
-        element.parent = createParent.tag
-        createParent.children.push(element)
-    }
-}
 export function parseHTML(html){
+
+    function createASTElement(tag,attrs){
+        return {
+            tag,
+            attrs,
+            children:[],
+            type:1,
+            parent:null
+        }
+    }
+    let root //根元素
+    let createParent //当前元素的父元素
+    let stack = [] //栈
+    function start(tag, atts){
+        // console.log('start()',tag,atts)
+        let element = createASTElement(tag,atts)
+        if(!root){
+            root =element
+        }
+        createParent=element
+        stack.push(element)
+    }
+    function charts(text){
+        // console.log('charts(text)',text)
+        text = text.replace(/\s/g,'')
+        if(text){
+            createParent.children.push({
+                type:3,
+                text:text
+            })
+        }
+    }
+    function end(tag){
+        // console.log('end(tag)',tag)
+        let element=stack.pop()
+        createParent=stack[stack.length-1]
+        if(createParent){
+            element.parent = createParent.tag
+            createParent.children.push(element)
+        }
+    }
     // <div id="app">hello {{msg}}</div>
     while(html){
         //判断标签
