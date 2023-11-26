@@ -1,4 +1,5 @@
 import {ArrayMethods} from "./arr";
+import {Dep} from "./dep";
 
 export function observer(data){
     // console.log(data)
@@ -7,14 +8,20 @@ export function observer(data){
     if(typeof data!='object' || data==null){
         return
     }
+    //判断是否已经观测
+    if(data.__ob__){
+        return data
+    }
     //劫持
     return new Observer(data)
 }
 
 class Observer {
     constructor(value) {
+        this.dep=new Dep()
         Object.defineProperty(value, '__ob__',{
             enumerable:false,
+            configurable:false,
             value:this
         })
         // console.log(value)
@@ -46,10 +53,19 @@ class Observer {
 }
 
 function defineReactive(data, key, value) {
-    observer(value)
+    let childDep = observer(value) //迭代
+    // console.log('childDep',childDep)
+    let dep=new Dep()
     Object.defineProperty(data,key,{
         get(){
             // console.log('object get')
+            if(Dep.target){
+                dep.depend()
+                if(childDep && childDep.dep){
+                    childDep.dep.depend() //数组收集
+                }
+            }
+            // console.log('dep',dep)
             return value
         },
         set(newValve){
@@ -59,6 +75,7 @@ function defineReactive(data, key, value) {
             }
             observer(newValve)
             value = newValve
+            dep.notify()
         }
     })
 }

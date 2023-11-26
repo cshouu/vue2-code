@@ -1,4 +1,5 @@
 import {observer} from "./observer/index";
+import {nextTick} from "./utils/nextTick";
 
 export function initState(vm){
     let opts = vm.$options
@@ -56,4 +57,10 @@ function initMethods() {
 
 function initWatch() {
 
+}
+
+export function stateMixin(Vue){
+    Vue.prototype.$nextTick=function(cb){//数据更新后获取到最新的dom
+        nextTick(cb)
+    }
 }

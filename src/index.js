@@ -2,6 +2,7 @@ import {initMixin} from './init'
 import {renderMixin} from "./vnode/index";
 import {lifecycleMixin} from "./lifecycle";
 import {initGlobApi} from "./global-api/index";
+import {stateMixin} from "./initState";
 
 
 function Vue(options) {
@@ -10,8 +11,9 @@ function Vue(options) {
 }
 
 initMixin(Vue)
-renderMixin(Vue)
 lifecycleMixin(Vue)
+renderMixin(Vue)
+stateMixin(Vue) //$nextTick
 //全局方法
 initGlobApi(Vue)
 
